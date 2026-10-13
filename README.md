@@ -1,6 +1,15 @@
 # G-Squad
 
-G-Squad is a Next.js application that includes Deriv OAuth authentication and WebSocket trading integration.
+G-Squad is a Next.js-based Deriv auto trading bot project.
+
+This repository is designed to run as a Next.js application and includes the core Deriv OAuth, account, and WebSocket modules needed for trading automation.
+
+## Project purpose
+
+- Deriv auto trading bot platform
+- OAuth login and account access for Deriv
+- Real-time WebSocket market data and trading actions
+- Browser-based client flow for automated trading logic
 
 ## Required stack
 
@@ -8,7 +17,7 @@ This project must be built and run with Next.js.
 
 - Node.js 18 or newer
 - npm or pnpm
-- Next.js app structure
+- Next.js app router setup
 
 ## Prerequisites
 
@@ -16,11 +25,11 @@ Before starting development, make sure you have:
 
 1. Node.js installed
 2. Dependencies installed with `npm install` or `pnpm install`
-3. A valid `.env.local` or environment file with the Deriv settings configured
+3. A valid `.env.local` or environment file with the Deriv configuration
 
 ## Environment setup
 
-Create a `.env.local` file in the project root with the following values:
+Create a `.env.local` file in the project root:
 
 ```env
 NEXT_PUBLIC_DERIV_APP_ID=33E1sj7WNaMsjg5MAxPyS
@@ -44,13 +53,13 @@ or
 pnpm install
 ```
 
-## Run the app
+## Run the app locally
 
 ```bash
 npm run dev
 ```
 
-Then open:
+Open:
 
 ```text
 http://localhost:3000
@@ -63,14 +72,14 @@ npm run build
 npm run start
 ```
 
-## Project structure
+## Repository structure
 
 ```text
 .
-├── .env
-├── .env.example
-├── .env.production
-├── README.md
+├── app/
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
 ├── core/
 │   ├── package.json
 │   └── src/
@@ -85,24 +94,32 @@ npm run start
 │       │   └── useDerivWS.ts
 │       └── ws/
 │           └── deriv-ws.ts
-└── public/ (if present in the app)
+├── .env
+├── .env.example
+├── .env.production
+├── .gitignore
+├── next-env.d.ts
+├── next.config.mjs
+├── package.json
+├── README.md
+├── tsconfig.json
+└── app/
 ```
 
 ## Notes for developers
 
-- This app is intended for a Next.js runtime environment.
-- The Deriv authentication flow relies on browser storage and redirect-based OAuth.
-- The WebSocket connection layer is designed for the browser/client side and should be used within a client component or a client-safe hook.
-- If you are creating a new page or component, use a Next.js page, route, or client component structure consistent with the app.
+- This project is intended for a Next.js runtime.
+- The app is built around Deriv OAuth and trading automation flows.
+- The trading logic and WebSocket flows should be executed in client-safe code paths within the Next.js app.
+- Use the provided `core` modules as the underlying integration layer for Deriv authentication and market connection.
 
-## Deriv integration
+## Deriv bot integration
 
-The repository contains the core Deriv helper modules needed for:
+The repo is set up to support a Deriv auto trading bot architecture that includes:
 
 - OAuth PKCE login
 - token exchange and refresh
-- account fetching
+- account discovery
 - WebSocket OTP generation
-- real-time Deriv WebSocket connection management
-
-These files are meant to be used inside the Next.js app architecture.
+- authenticated market socket connections
+- trading automation logic built on top of the Deriv API
