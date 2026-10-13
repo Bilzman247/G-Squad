@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import './globals.css';
 
 export const metadata = {
@@ -11,10 +12,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <header className="app-header">
           <div className="header-inner">
-            <img src="/robot-logo.svg" alt="G-Squad logo" className="app-logo" />
-            <div className="app-title">G-Squad</div>
-            <nav className="header-actions">
-              <button className="btn header-btn">Log in</button>
+            <Link href="/dashboard" aria-label="Go to dashboard" className="brand-wrap">
+              <img src="/robot-logo.svg" alt="G-Squad logo" className="app-logo" />
+              <div className="app-title">G-Squad</div>
+            </Link>
+
+            <nav className="header-actions" aria-label="Header actions">
+              <Link href="/dashboard" className="btn header-btn">
+                Log in
+              </Link>
             </nav>
           </div>
         </header>
@@ -22,9 +28,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="app-main">{children}</main>
 
         <nav className="app-bottom-nav" aria-label="Bottom navigation">
-          <button className="nav-item">Dashboard</button>
-          <button className="nav-item">Trade</button>
-          <button className="nav-item">Reports</button>
+          <Link href="/dashboard" className="nav-item">Dashboard</Link>
+          <Link href="/trade" className="nav-item">Trade</Link>
+          <Link href="/reports" className="nav-item">Reports</Link>
         </nav>
       </body>
     </html>
