@@ -2,8 +2,8 @@ html, body {
   margin: 0;
   padding: 0;
   min-height: 100%;
-  background: #07131f;
-  color: #edf6ff;
+  background: #fff5e6; /* cream background */
+  color: #000000; /* black text */
 }
 
 * {
@@ -17,6 +17,7 @@ body {
 main {
   max-width: 900px;
   margin: 0 auto;
+  padding: 2rem;
 }
 
 h1 {
@@ -29,4 +30,100 @@ p, li {
 
 ul {
   padding-left: 1.2rem;
+}
+
+/* App specific styles */
+.app-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.splash-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 3rem 4rem;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.splash-title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.splash-sub {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+label {
+  min-width: 140px;
+  font-weight: 600;
+}
+
+input[type="number"], select {
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: #fff;
+  color: #000;
+}
+
+.contracts {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.btn-row {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  background: #d4af37; /* gold yellow */
+  color: #000; /* black text */
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-stop {
+  background: #e07a1a; /* darker gold/orange for stop */
+  color: #000;
+}
+
+.status {
+  margin-top: 1rem;
+  font-weight: 700;
+}
+
+.small-muted {
+  color: rgba(0,0,0,0.6);
+  font-size: 0.9rem;
 }
