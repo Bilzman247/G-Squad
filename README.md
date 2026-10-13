@@ -10,6 +10,7 @@ This repository is designed to run as a Next.js application and includes the cor
 - OAuth login and account access for Deriv
 - Real-time WebSocket market data and trading actions
 - Browser-based client flow for automated trading logic
+- Hidden strategy execution layer with a minimal operator dashboard
 
 ## Required stack
 
@@ -72,28 +73,51 @@ npm run build
 npm run start
 ```
 
+## Bot dashboard behavior
+
+The dashboard intentionally exposes only a limited operator interface:
+
+- stake amount
+- risk management level
+- start / stop controls
+- fixed symbol: Volatility 100 (1s) Index
+- fixed contract direction: Rise / Fall
+
+All strategy logic is intentionally hidden from the UI and kept in the backend server logic.
+
+## Server-side bot architecture
+
+The project now includes a server-side runtime for the bot and initial OAuth handoff routes:
+
+- `/api/auth/start` — creates the Deriv auth request information
+- `/api/auth/callback` — handles the OAuth redirect and token exchange
+- `/api/bot/start` — starts the runtime with the current bot config
+- `/api/bot/stop` — stops the runtime
+- `/api/bot/status` — returns the current bot status
+
+This is a hybrid server-side design, which is more suitable than pure client code for a real Deriv auto trading bot.
+
 ## Repository structure
 
 ```text
 .
 ├── app/
+│   ├── api/
+│   │   ├── auth/
+│   │   │   ├── callback/route.ts
+│   │   │   └── start/route.ts
+│   │   └── bot/
+│   │       ├── start/route.ts
+│   │       ├── status/route.ts
+│   │       └── stop/route.ts
+│   ├── components/
+│   │   └── Dashboard.tsx
 │   ├── globals.css
 │   ├── layout.tsx
 │   └── page.tsx
-├── core/
-│   ├── package.json
-│   └── src/
-│       ├── auth/
-│       │   ├── accounts.ts
-│       │   ├── crypto.ts
-│       │   ├── oauth.ts
-│       │   └── storage.ts
-│       ├── config/
-│       │   └── urls.ts
-│       ├── react/
-│       │   └── useDerivWS.ts
-│       └── ws/
-│           └── deriv-ws.ts
+├── lib/
+│   ├── bot-state.ts
+│   └── deriv.ts
 ├── .env
 ├── .env.example
 ├── .env.production
@@ -110,8 +134,8 @@ npm run start
 
 - This project is intended for a Next.js runtime.
 - The app is built around Deriv OAuth and trading automation flows.
-- The trading logic and WebSocket flows should be executed in client-safe code paths within the Next.js app.
-- Use the provided `core` modules as the underlying integration layer for Deriv authentication and market connection.
+- The strategy layer is intentionally hidden from the UI and should remain in server-side code.
+- The current bot runtime is structured for safe server-side control, while the UI only exposes minimal operator inputs.
 
 ## Deriv bot integration
 
@@ -122,4 +146,4 @@ The repo is set up to support a Deriv auto trading bot architecture that include
 - account discovery
 - WebSocket OTP generation
 - authenticated market socket connections
-- trading automation logic built on top of the Deriv API
+- protected trading automation logic behind the backend runtime
