@@ -14,10 +14,17 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-main {
+/* Fixed header and bottom nav sizes */
+:root {
+  --header-height: 64px;
+  --bottom-nav-height: 56px;
+}
+
+main.app-main {
   max-width: 900px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: calc(2rem + var(--header-height)) 2rem calc(2rem + var(--bottom-nav-height));
+  min-height: calc(100vh - var(--header-height) - var(--bottom-nav-height));
 }
 
 h1 {
@@ -32,6 +39,79 @@ ul {
   padding-left: 1.2rem;
 }
 
+/* App header (fixed) */
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.95);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  z-index: 50;
+}
+
+.header-inner {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.app-logo {
+  width: 42px;
+  height: 42px;
+}
+
+.app-title {
+  font-weight: 800;
+  font-size: 1.125rem;
+}
+
+.header-actions {
+  margin-left: auto;
+}
+
+.header-btn {
+  padding: 0.45rem 0.8rem;
+  border-radius: 8px;
+  border: none;
+  background: #d4af37;
+  color: #000;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Bottom navigation (fixed) */
+.app-bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--bottom-nav-height);
+  background: rgba(255,255,255,0.95);
+  border-top: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  z-index: 50;
+}
+
+.app-bottom-nav .nav-item {
+  background: transparent;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 /* App specific styles */
 .app-center {
   display: flex;
@@ -42,11 +122,17 @@ ul {
 }
 
 .splash-card {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   border-radius: 12px;
   padding: 3rem 4rem;
   text-align: center;
   box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.splash-card img {
+  width: 96px;
+  height: 96px;
+  margin-bottom: 1rem;
 }
 
 .splash-title {
